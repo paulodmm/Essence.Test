@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Operations Version="1.0" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+  <Operation Name="Rename Refactor" Key="dc1e8da7-7fa9-47a1-bb33-eef1b5822fdd" ChangeDateTime="08/18/2019 17:18:12">
+    <Property Name="ElementName" Value="[dbo].[CalculoHistoricoLog].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[CalculoHistoricoLog]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="CalculoHistoricoLogId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="bd401d9d-4592-4f7a-a9b1-209f46541f1d" ChangeDateTime="08/18/2019 17:51:11">
+    <Property Name="ElementName" Value="[dbo].[CalculoHistoricoLog].[Latitude1]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[CalculoHistoricoLog]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="AmigoId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="8c76d14d-d699-4ff0-ad72-7ccbb73681e1" ChangeDateTime="08/18/2019 17:51:26">
+    <Property Name="ElementName" Value="[dbo].[CalculoHistoricoLog].[AmigoId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[CalculoHistoricoLog]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="AmigoId1" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="0a9e33d7-c830-4311-9c05-7c5607c371b3" ChangeDateTime="08/18/2019 17:51:34">
+    <Property Name="ElementName" Value="[dbo].[CalculoHistoricoLog].[Longitude1]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[CalculoHistoricoLog]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="AmigoId2" />
+  </Operation>
+</Operations>

@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    
+</head>
+<body>
+    <h1>Lista de Amigos</h1>
+    <p *ngIf="!empList"><em>Carregando...</em></p>
+    <table class='table' *ngIf="amigosList">
+        <thead>
+            <tr>
+                <th>AmigoId</th>
+                <th>Nome</th>
+                <th>Latitude</th>
+                <th>Latitude</th>
+                <th>Distancia</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let emp of empList">
+                <td>{{ emp.AmigoId }}</td>
+                <td>{{ emp.Nome }}</td>
+                <td>{{ emp.Latitude }}</td>
+                <td>{{ emp.Longitude }}</td>
+                <td>{{ emp.Distancia }}</td>
+                <td>
+                <td>
+                    <!--<a [routerLink]="['/employee/edit/', emp.id]">Edit</a> |-->
+                    <a [routerLink]="" (click)="AmigoId(emp.AmigoId)">Delete</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
