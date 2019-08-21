@@ -33,7 +33,7 @@ namespace Essence.Test.FormUI
             auth.Email = GetSettingsValue("EmailAuth");
             auth.Password = GetSettingsValue("PasswordAuth");  
 
-            HttpResponseMessage response = client.PostAsJsonAsync("api/UserAuth/login", auth).Result;
+            HttpResponseMessage response = client.PostAsJsonAsync("api/UserAuth/login2", auth).Result;
             if (response.IsSuccessStatusCode)
             {
                 var product = response.Content.ReadAsStringAsync();

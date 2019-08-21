@@ -27,29 +27,41 @@ namespace Essence.Test.FormUI
             lbxListaAmigos.Items.Clear();
 
             var amigos = service.GetAll();
-            foreach (var amigo in amigos)
+            if (amigos == null || !amigos.Any())
             {
-                string item = string.Format("id: {0} - {1} Lat:{2} Long: {3}"
-                    , amigo.AmigoId.ToString()
-                    , amigo.Nome
-                    , amigo.Latitude
-                    , amigo.Longitude);
-                lbxListaAmigos.Items.Add(item);
+                lbxListaAmigos.Items.Add("Cadastre novos amigos");
+            }
+            else
+            {
+                foreach (var amigo in amigos)
+                {
+                    string item = string.Format("id: {0} - {1} Lat:{2} Long: {3}"
+                        , amigo.AmigoId.ToString()
+                        , amigo.Nome
+                        , amigo.Latitude
+                        , amigo.Longitude);
+                    lbxListaAmigos.Items.Add(item);
+                }
             }
         }
 
         private void AtualizarAmigosProximos(int id)
-        {
+        {            
             lbxAmigosProximos.Items.Clear();
 
-            var amigos = service.AmigosProximos(id);
-            foreach (var amigo in amigos)
+            if (id == 0)
+                lbxAmigosProximos.Items.Add("Nenhum amigo selecionado");
+            else
             {
-                string item = string.Format("id: {0} - {1} Distância:{2}"
-                    , amigo.AmigoId.ToString()
-                    , amigo.Nome
-                    , amigo.Distancia);
-                lbxAmigosProximos.Items.Add(item);
+                var amigos = service.AmigosProximos(id);
+                foreach (var amigo in amigos)
+                {
+                    string item = string.Format("id: {0} - {1} Distância:{2}"
+                        , amigo.AmigoId.ToString()
+                        , amigo.Nome
+                        , amigo.Distancia);
+                    lbxAmigosProximos.Items.Add(item);
+                }
             }
         }
 
@@ -72,8 +84,12 @@ namespace Essence.Test.FormUI
         {
             var itemSelecionado = lbxListaAmigos.SelectedItem;
             string pattern = @"id\: (\d+) \-(.*)";
-            int id = Convert.ToInt32(Regex.Replace(itemSelecionado.ToString(), pattern, "$1"));
+            string idText = itemSelecionado != null
+                ? Regex.Replace(itemSelecionado.ToString(), pattern, "$1")
+                : "0";
 
+            int id = 0;
+            int.TryParse(idText, out id);
             AtualizarAmigosProximos(id);
         }
 

@@ -25,7 +25,7 @@ namespace Essence.Test.Base.BUS
         /// <param name="dto"></param>
         public void Add(AmigoDTO dto)
         {
-            Amigo model = Converter(dto);
+            Amigo model = Mapear(dto);
 
             if (!dal.Confirmar(dto.Latitude, dto.Longitude))
                 dal.Add(model);
@@ -44,7 +44,7 @@ namespace Essence.Test.Base.BUS
             List<AmigoDTO> retorno = new List<AmigoDTO>();
 
             foreach (var item in amigos)
-                retorno.Add(Converter(item));
+                retorno.Add(Mapear(item));
 
             return retorno;
         }
@@ -61,7 +61,7 @@ namespace Essence.Test.Base.BUS
             List<AmigoDTO> retorno = new List<AmigoDTO>();
 
             foreach (var item in amigos)
-                retorno.Add(Converter(item));
+                retorno.Add(Mapear(item));
 
             return retorno;
         }
@@ -71,7 +71,7 @@ namespace Essence.Test.Base.BUS
         /// </summary>
         /// <param name="dto"></param>
         /// <returns></returns>
-        public static Amigo Converter(AmigoDTO dto)
+        public static Amigo Mapear(AmigoDTO dto)
         {
             Amigo retorno = new Amigo();
 
@@ -79,6 +79,7 @@ namespace Essence.Test.Base.BUS
             retorno.Latitude = dto.Latitude;
             retorno.Longitude = dto.Longitude;
             retorno.Nome = dto.Nome;
+            retorno.Distancia = dto.Distancia;
 
             return retorno;
         }
@@ -88,7 +89,7 @@ namespace Essence.Test.Base.BUS
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public static AmigoDTO Converter(Amigo model)
+        public static AmigoDTO Mapear(Amigo model)
         {
             AmigoDTO retorno = new AmigoDTO();
 
@@ -96,6 +97,7 @@ namespace Essence.Test.Base.BUS
             retorno.Latitude = model.Latitude;
             retorno.Longitude = model.Longitude;
             retorno.Nome = model.Nome;
+            retorno.Distancia = model.Distancia;
 
             return retorno;
         }

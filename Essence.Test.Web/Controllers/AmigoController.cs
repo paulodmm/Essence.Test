@@ -16,6 +16,7 @@ namespace Essence.Test.Web.Controllers
     public class AmigoController : Controller
     {
         // POST api/values
+        [Authorize("Bearer")]
         [HttpPost]
         public void Add([FromBody]Amigo model)
         {
@@ -29,6 +30,7 @@ namespace Essence.Test.Web.Controllers
             bus.Add(amigo);
         }
 
+        [Authorize("Bearer")]
         [HttpGet]
         [Route("GetAll/")]
         public IEnumerable<AmigoDTO> GetAll()
@@ -37,6 +39,7 @@ namespace Essence.Test.Web.Controllers
             return bus.GetAll();
         }
 
+        [Authorize("Bearer")]
         [HttpGet("{id}")]
         [Route("AmigosProximos/{id}")]
         public IEnumerable<AmigoDTO> AmigosProximos(int id)

@@ -14,6 +14,8 @@ using Essence.Test.Web.Model;
 using Microsoft.IdentityModel.Clients.ActiveDirectory;
 using System.Text;
 using Microsoft.AspNetCore.Authorization;
+using System.Security.Principal;
+using Essence.Test.Web.Context;
 
 namespace Essence.Test.Web.Controllers
 {
@@ -77,6 +79,72 @@ namespace Essence.Test.Web.Controllers
                 Token = new JwtSecurityTokenHandler().WriteToken(token),
                 Expiration = expiration
             };
+        }
+
+
+        [AllowAnonymous]
+        [HttpPost("Login2")]
+        public UserToken Login2(
+            [FromBody]UserAuth userInfo,
+            [FromServices]SigningConfigurations signingConfigurations,
+            [FromServices]TokenConfigurations tokenConfigurations)
+        {
+            bool credenciaisValidas = false;
+            if (userInfo.Email == "emailteste@essence.com" && userInfo.Password == "senhateste")
+            {
+                credenciaisValidas = true;
+            }
+
+            if (credenciaisValidas)
+            {
+                var token = BuildTokenNew(userInfo, signingConfigurations, tokenConfigurations);
+                return token;
+            }
+            else
+            {
+                throw new Exception("login inválido.");
+            }
+        }
+
+        private UserToken BuildTokenNew(UserAuth userInfo, SigningConfigurations signingConfigurations,TokenConfigurations tokenConfigurations)
+        {
+            ClaimsIdentity identity = new ClaimsIdentity(
+               new GenericIdentity(userInfo.Email, "Login"),
+               new[] {
+                        new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString("N")),
+                        new Claim(JwtRegisteredClaimNames.UniqueName, userInfo.Email)
+               }
+           );
+
+            var expiration = DateTime.UtcNow.AddHours(1);
+            DateTime dataCriacao = DateTime.Now;
+            DateTime dataExpiracao = expiration;
+
+            var handler = new JwtSecurityTokenHandler();
+            var securityToken = handler.CreateToken(new SecurityTokenDescriptor
+            {
+                Issuer = tokenConfigurations.Issuer,
+                Audience = tokenConfigurations.Audience,
+                SigningCredentials = signingConfigurations.SigningCredentials,
+                Subject = identity,
+                NotBefore = dataCriacao,
+                Expires = dataExpiracao
+            });
+            var token = handler.WriteToken(securityToken);
+
+            var retorno = new UserToken();
+            retorno.Expiration = dataExpiracao;
+            retorno.Token = token;
+
+            return retorno;
+            //return new
+            //{
+            //    authenticated = true,
+            //    created = dataCriacao.ToString("yyyy-MM-dd HH:mm:ss"),
+            //    expiration = dataExpiracao.ToString("yyyy-MM-dd HH:mm:ss"),
+            //    accessToken = token,
+            //    message = "OK"
+            //};
         }
     }
 }
