@@ -4,10 +4,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using Essence.Test.Base.BUS;
 using Essence.Test.Domain.DTO;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Essence.Test.Web.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     public class ValuesController : Controller
     {

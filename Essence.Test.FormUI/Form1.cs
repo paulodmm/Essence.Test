@@ -13,17 +13,17 @@ namespace Essence.Test.FormUI
 {
     public partial class Form1 : Form
     {
+        APIService service;
+
         public Form1()
         {
             InitializeComponent();
-
+            service = new APIService();
             AtualizarAmigos();
         }
 
         private void AtualizarAmigos()
         {
-            APIService service = new APIService();
-
             lbxListaAmigos.Items.Clear();
 
             var amigos = service.GetAll();
@@ -40,8 +40,6 @@ namespace Essence.Test.FormUI
 
         private void AtualizarAmigosProximos(int id)
         {
-            APIService service = new APIService();
-
             lbxAmigosProximos.Items.Clear();
 
             var amigos = service.AmigosProximos(id);
@@ -93,7 +91,6 @@ namespace Essence.Test.FormUI
                 amigo.Latitude = Convert.ToDouble(txtLatitude.Text);
                 amigo.Longitude = Convert.ToDouble(txtLongitude.Text);
 
-                APIService service = new APIService();
                 service.Add(amigo);
 
                 AtualizarAmigos();

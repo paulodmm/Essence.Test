@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Essence.Test.Base.BUS;
 using Essence.Test.Domain.DTO;
 using Essence.Test.RepositoryCore.Entity;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
